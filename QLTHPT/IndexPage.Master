@@ -1,0 +1,230 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="IndexPage.Master.cs" Inherits="QLTHPT.Home" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <link href="App_Themes/1399936405_54321.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta http-equiv="Site-Exit" content="revealTrans(Duration=3.0,Transition=23)"/>
+    <meta http-equiv="Page-Exit" content="progid:DXImageTransform.Microsoft.GradientWipe(duration=.5)">
+   <title>Website Template</title>
+	<meta charset="utf-8" />
+   <link href="App_Themes/IndexPage/hhh.css" rel="stylesheet" />
+	<meta name="viewport" content="width=960"  />   
+<link rel='stylesheet'  href="App_Themes/IndexPage/diapo.css" type='text/css' media='all' /> 
+    <script type='text/javascript' src="App_Themes/IndexPage/scripts/jquery.min.js"></script>
+<!--[if !IE]><!--><script type='text/javascript' src="App_Themes/IndexPage/scripts/jquery.mobile-1.0rc2.customized.min.js"></script><!--<![endif]-->
+<script type='text/javascript' src="App_Themes/IndexPage/scripts/jquery.easing.1.3.js"></script> 
+<script type='text/javascript' src="App_Themes/IndexPage/scripts/jquery.hoverIntent.minified.js"></script> 
+<script type='text/javascript' src="App_Themes/IndexPage/scripts/diapo.js"></script> 
+ <%--   <script src="App_Themes/IndexPage/scripts/jquery-2.1.0.min.js"></script>--%>
+   <%-- <script src="App_Themes/IndexPage/scripts/jquery-2.1.0.js"></script>--%>
+     <style type="text/css">
+         /*#top {
+             width: 50px;
+             height: 50px;
+             position: fixed;
+             bottom: 10px;
+             right: 10px;
+             text-indent: -99999px;
+             cursor: pointer;
+             background: url(back-to-top1.png) no-repeat 0 0;*/
+         /*}*/
+         #pagewrap {
+             margin: 0 auto;
+             width: 600px;
+             padding-left: 150px;
+             position: relative;
+         }
+         /*Back to top button*/
+         #back-top {
+             position: fixed;
+             bottom: -7px;
+             margin-left: 810px;
+         }
+
+             #back-top a {
+                 width: 70px;
+                 display: block;
+                 text-align: center;
+                 font: 11px/100% Arial, Helvetica, sans-serif;
+                 text-transform: uppercase;
+                 text-decoration: none;
+                 color: #bbb;
+                 /* background color transition */
+                 -webkit-transition: 1s;
+                 -moz-transition: 1s;
+                 transition: 1s;
+             }
+
+                 #back-top a:hover {
+                     color: #000;
+                 }
+             /* arrow icon (span tag) */
+             #back-top span {
+                 width: 64px;
+                 height: 64px;
+                 display: block;
+                 margin-bottom: 7px;
+                 background: url(back-to-top1.png) no-repeat center center;
+                 /* rounded corners */
+                 -webkit-border-radius: 15px;
+                 -moz-border-radius: 15px;
+                 border-radius: 15px;
+                 /* background color transition */
+                 -webkit-transition: 1s;
+                 -moz-transition: 1s;
+                 transition: 1s;
+             }
+
+             #back-top a:hover span {
+                 background-color: #777;
+             }
+     </style>
+<%--     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>--%>
+    <script>
+        $(function () {
+            $('.pix_diapo').diapo();
+        });
+        $(document).ready(function () {
+
+            // hide #back-top first
+            $("#back-top").hide();
+
+            // fade in #back-top
+            $(function () {
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() > 100) {
+                        $('#back-top').fadeIn();
+                    } else {
+                        $('#back-top').fadeOut();
+                    }
+                });
+                // scroll body to 0px on click
+                $('#back-top a').click(function () {
+                    $('body,html').animate({
+                        scrollTop: 0
+                    }, 800);
+                    return false;
+                });
+            });
+
+        });
+
+    </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+          <div id="pagewrap">
+            <p id="back-top">
+                <a href="#top"><span></span>Back to Top</a>
+            </p>
+        </div>
+  <div id="background">
+		<div id="page">
+			<div id="body">
+				<div id="sidebar"> <a id="logo" href="Default.aspx"></a>
+                    <ul>
+						<li> <a href="admin.aspx">Quản Lí Điểm</a></li>
+                  
+						<li>
+                            <a href="TraCuu.aspx">Tra Cứu </a>
+						</li>
+						<li>
+							<a href="ThongKe.aspx">Thống Kê</a>
+						</li>
+					</ul>
+				</div>
+				<div id="content">
+					<div id="header">
+
+						<ul class="navigation">
+							<li class="first">
+								<a class="active" href="Default.aspx">Trang chủ</a>
+							</li>
+							<li>
+								<a href="TinTuc.aspx">Tin Tức</a>
+							</li>
+							<li>
+								<a href="ThuVienAnh.aspx">Thư viện ảnh</a>
+							</li>		
+							<li>
+								<a href="LienHe.aspx">Liên hệ</a>
+							</li>
+                          
+						</ul>
+					    <br />
+					</div>
+					<div class="body"> 
+                        <div class="pix_diapo">
+                            <asp:Repeater ID="rptPicture" runat="server">
+                                <ItemTemplate>
+                                    <div data-thumb='<%# ResolveUrl("~/App_Themes/IndexPage/imagesBanner/slides/") + Eval("Picture") %>'>
+                                        <img src='<%# ResolveUrl("~/App_Themes/IndexPage/imagesBanner/slides/") + Eval("Picture") %>' alt="Slide" />
+                                    </div>
+                                </ItemTemplate>
+                            </asp:Repeater>
+
+
+                        </div>
+						<div class="content">
+                            <br />                             
+							<asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                            </asp:ContentPlaceHolder>
+						</div>
+					</div>
+				</div>
+				<div class="featured">                       
+
+				</div>
+                <div id="trungpq">
+                 <div id="trai_">
+                            <h2>Lượt truy cập: </h2>
+							<img src="App_Themes/IndexPage/images/truycap1.jpg" width:"200px" alt="" style="height: 164px; width: 272px;" />
+							<p class="p" style="font-size:15px; font-style:oblique;">
+								Số lượt truy cập: <%= Application["DaTruyCap"].ToString() %>
+							</p>
+                            <p class="p" style="font-size:15px; font-style:oblique;">
+								Đang online: <%= Application["DangTruyCap"].ToString() %>
+                                <br />
+							</p>
+                        </div>
+                        <div id="giua_">
+                            <h2> <a href="LienHe.aspx">Trợ giúp sử dụng phần mềm.</a> </h2>
+							<img src="App_Themes/nhatruong/images/support.jpg" alt="" style="height: 167px; width: 273px" />
+							<p>
+								Hướng dẫn chi tiết về việc sử dụng phần mềm.
+                                <br />
+                                Gọi <a href="tel:+0353169175">0353169175</a> để được hướng dẫn sử dụng phần mềm.
+							</p>
+                        </div>
+                        <div id="phai_">
+                            <h2> <a href="TTNhaTruong.aspx">Thông tin nhà trường</a> </h2>
+							<img src="App_Themes/nhatruong/images/anhTruong01.png" alt="" style="width: 273px; height: 167px"/>
+							<p>
+								Địa chỉ: Nhà trường cung cấp sau cho bên thiết kế.
+                                <br />
+                                Số điện thoại: Nhà trường cung cấp sau cho bên thiết kế.
+							</p>
+                        </div>
+                    </div>
+			</div>
+			<div id="footer">
+				<div class="section">
+                    <ul>
+                        <li>
+                            <h1> Phát triển bởi Team 6 </h1>                            
+                        </li>
+                    </ul>
+				</div>
+				<div class="footnote">
+                        <a href="Default.aspx"> 
+                            &copy; 2025 Trường THPT Duy Tân
+                        </a> 
+                </div>
+			</div>
+		</div>
+	</div>
+    </form>
+</body>
+</html>
